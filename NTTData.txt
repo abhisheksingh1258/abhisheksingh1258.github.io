@@ -1,0 +1,27 @@
+An index is a schema object that contains an entry for each value that appears in the indexed column(s) of the table or 
+cluster and provides direct, fast access to rows. 
+Oracle Database supports several types of index: Normal indexes. (By default, Oracle Database creates B-tree indexes.)
+
+Hash Joins
+
+https://logicalread.com/oracle-11g-hash-joins-mc02/#.WmYra66WbIU
+
+
+
+The nested loops join, also called nested iteration, uses one join input as the outer input table 
+(shown as the top input in the graphical execution plan) and one as the inner (bottom) input table. 
+The outer loop consumes the outer input table row by row.
+
+HASH joins are the usual choice of the Oracle optimizer when the memory is set up to accommodate them. 
+In a HASH join, Oracle accesses one table
+ (usually the smaller of the joined results) and builds a hash table on the join key in memory.
+
+http://tech.e2sn.com/oracle/sql/the-fundamental-difference-between-nested-loops-and-hash-joins
+
+To identify a long-running query interactively
+Start SQL Profiler.
+On the File menu, click New, and then click Trace.
+Specify the relevant connection details to connect to the computer running SQL Server. ...
+In the Template name list, click SQLProfilerTSQL_Duration.
+Click the Events tab. ...
+Click Run to run the trace.
