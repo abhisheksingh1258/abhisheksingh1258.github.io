@@ -1,0 +1,73 @@
+<html>
+<head>
+<h1>Views in Oracle</h1>
+</head>
+<body>
+<p>View is simply the subset of table which are stored logicaly in a database which means it is a virtual table in the database
+   whose contents are defined by a query.<br>To the database user,the view appears just like a real table, with a set of named columns
+and rows of data.</p>
+
+<h2>Advantages of view</h2>
+
+<p>Security-> Each user can be given permission to access the database only through a small set of views that contain the specific data the user
+is authorized to see, thus restricting the user's access to stored data<br><br>
+Query Simplicity-> A view can draw data from several different tables and present it as a single table, turning multi-table queries into single table queries
+against the view<br><br>
+Structural simplicity->Views can give a user a "personalized" view of the database structure, presenting the database as a set of virtual tables that 
+make sense for that user.<br><br>
+Consistency->A view can present a consistent, unchanged image of the structure of the database, even if the underlying source tables are split, 
+restructured, or renamed.<br>
+Data Integrity->If data is accessed and entered through a view, the DBMS can automatically check the data to ensure that it meets 
+the specified integrity constraints.<br><br>
+<h3>Disadvantage of Views</h3>
+
+Performance->Views create the appearance of a table, but the DBMS must still translate queries against the view into queries against the underlying source tables. 
+If the view is defined by a complex, multi-table query then simple queries on the views may take considerable time.<br><br>
+
+Update restrictions->When a user tries to update rows of a view, the DBMS must translate the request into an update on rows of the underlying source tables. 
+This is possible for simple views, but more complex views are often restricted to read-only.
+
+
+<h3>to create an updatable view, the SELECT statement that defines the view must not contain any of the following elements:</h3>
+
+Aggregate functions such as MIN, MAX, SUM, AVG, COUNT, etc.<br>
+DISTINCT<br>
+GROUP BY clause.<br>
+HAVING clause.<br>
+UNION or UNION ALL clause.<br>
+Left join or outer join.<br>
+Subquery in the SELECT clause or in the WHERE clause that refers to the table appeared in the FROM clause.<br>
+Reference to non-updatable view in the FROM clause.<br>
+Reference only to literal values.<br>
+Multiple references to any column of the base table.<br>
+
+<h3>The following query gets all views from the classicmodels database and shows which views are updatable.</h3>
+
+SELECT 
+    table_name, is_updatable
+FROM
+    information_schema.views
+WHERE
+    table_schema = 'classicmodels'; <br>
+	
+	
+Yes, when you update a view it affects original table, because SELECT opens an implicit cursor which points to the records from the base table.
+ When ever you update the records it updates the original data since they are pointers to the original.	<br>
+ 
+ 
+ <h3>Materialized Views</h3>
+ 
+ 
+ A materialized view in Oracle is a database object that contains the results of a query. They are local copies of data located remotely, or are used to create summary tables based on aggregations of a table's data. Materialized views, which store data based on remote tables are also, know as snapshots.
+
+A materialized view can query tables, views, and other materialized views. Collectively these are called master tables (a replication term) or detail tables (a data warehouse term).
+
+For replication purposes, materialized views allow you to maintain copies of remote data on your local node. These copies are read-only. If you want to update the local copies, you have to use the Advanced Replication feature. You can select data from a materialized view as you would from a table or view.
+
+For data warehousing purposes, the materialized views commonly created are aggregate views, single-table aggregate views, and join views.
+ 
+
+
+ </p>
+</body>
+</html>

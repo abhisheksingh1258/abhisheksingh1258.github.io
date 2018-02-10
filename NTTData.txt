@@ -25,3 +25,45 @@ Specify the relevant connection details to connect to the computer running SQL S
 In the Template name list, click SQLProfilerTSQL_Duration.
 Click the Events tab. ...
 Click Run to run the trace.
+
+
+
+
+
+
+
+1. TRUNCATE is a DDL (Data Definition Language) command and DELETE is a DML (Data Manipulation Language) command.
+
+2. You can use WHERE clause with DELETE but not with TRUNCATE .
+
+3. You cannot rollback data in TRUNCATE but in DELETE it is possible to rollback data.
+
+4. A trigger doesn't get fired in case of TRUNCATE whereas Triggers get fired in case of a DELETE command.
+
+5. TRUNCATE is faster than DELETE. TRUNCATE is faster than DELETE due to the way TRUNCATE "removes" rows. Actually, TRUNCATE does not remove data, but rather deallocates whole data pages and removes pointers to indexes. The data still exists until it is overwritten or the database is shrunk. This action does not require a lot of resources and is therefore very fast.
+
+6. TRUNCATE resets the Identity counter if there is any identity column present in the table where DELETE does not reset the identity counter.
+
+7. You cannot TRUNCATE a table that has any foreign key constraints. You will have to remove the contraints, TRUNCATE the table, and reapply the contraints.
+
+8. DELETE and TRUNCATE operations are both logged. DELETE is a logged operation on a per row basis and TRUNCATE command logs the deallocation of the data pages in which the data exists.
+
+
+
+
+
+DECLARE 
+   CURSOR c_customers is  
+      SELECT  name FROM customers;  
+   TYPE c_list IS TABLE of customerS.No.ame%type; 
+   name_list c_list := c_list(); 
+   counter integer :=0; 
+BEGIN 
+   FOR n IN c_customers LOOP 
+      counter := counter +1; 
+      name_list.extend; 
+      name_list(counter)  := n.name; 
+      dbms_output.put_line('Customer('||counter||'):'||name_list(counter)); 
+   END LOOP; 
+END; 
+/ 
