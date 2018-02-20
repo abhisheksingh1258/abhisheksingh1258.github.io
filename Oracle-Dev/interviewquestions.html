@@ -1,0 +1,33 @@
+<html>
+<head>
+<h1>Interview Questions</h1>
+</head>
+<body>
+<p>
+How find files having size 5gb?<br>
+find /etc -size +100k<br>
+If we look at their sizes, they really are above 100k<br>
+
+<b>Zombie and Orphan Processes</b>
+
+Normally, when a child process is killed, the parent process is updated via a SIGCHLD signal.<br> 
+Then the parent can do some other task or restart a new child as needed. <br>
+However, sometimes the parent process is killed before its child is killed. In this case, the "parent of all processes,"<br> 
+the init process, becomes the new PPID (parent process ID). In some cases, these processes are called orphan processes.<br>
+
+When a process is killed, a ps listing may still show the process with a Z state. This is a zombie or defunct process.<br> 
+The process is dead and not being used. These processes are different from the orphan processes. <br>
+They have completed execution but still find an entry in the process table.<br>
+
+
+<b>Job ID Versus Process ID</b>
+Background and suspended processes are usually manipulated via job number (job ID).<br>
+ This number is different from the process ID and is used because it is shorter.<br>
+
+In addition, a job can consist of multiple processes running in a series or at the same time, in parallel. 
+Using the job ID is easier than tracking individual processes.<br>
+
+
+</p>
+</body>
+</html>

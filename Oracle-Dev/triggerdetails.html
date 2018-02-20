@@ -1,0 +1,51 @@
+<html>
+<head>
+<h3>Trigger in oracle</h3>
+</head>
+<body>
+<p>
+Triggers are stored programs, which are automatically executed or fired when some events occur. 
+Triggers are, in fact, written to be executed in response to any of the following events -<br>
+
+<ul>
+
+<li>A database manipulation (DML) statement (DELETE, INSERT, or UPDATE)</li>
+
+<li>A database definition (DDL) statement (CREATE, ALTER, or DROP).</li>
+
+<li>A database operation (SERVERERROR, LOGON, LOGOFF, STARTUP, or SHUTDOWN).</li>
+
+</ul>
+
+<h2>Benefits of Triggers</h2>
+
+Triggers can be written for the following purposes :<br>
+
+<ul>
+<li>Generating some derived column values automatically</li>
+<li>Enforcing referential integrity</li>
+<li>Event logging and storing information on table access</li>
+<li>Auditing</li>
+<li>Synchronous replication of tables</li>
+<li>Imposing security authorizations</li>
+<li>Preventing invalid transactions</li>
+</ul>
+
+<h2>some code for triggers</h2>
+
+CREATE OR REPLACE TRIGGER emp_comm_trig<br>
+    BEFORE INSERT ON emp<br>
+    FOR EACH ROW<br>
+BEGIN<br>
+    IF :NEW.deptno = 30 THEN<br>
+        :NEW.comm := :NEW.sal * .4;<br>
+    END IF;<br>
+END;<br>
+
+
+
+
+
+</p>
+</body>
+</html>

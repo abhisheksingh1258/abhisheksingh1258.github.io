@@ -3,6 +3,53 @@
 <h1>Unix Commands</h1>
 <head>
 <body>
+<p><h1>Find Command</h1>
+To find for a file using name-><b>find -name "sum.java"</b><br>
+To find for files using name and ignoring case->find -iname "sum.java"<br>
+To find for a file in the current directory only->find -maxdepth 1 -name "sum.java"<br>
+To find for files containing a specific word in its name->find -name "*java*"<br>
+To find for files in a specific directory->find /etc -name "*java*"<br>
+To find the files whose name are not "sum.java"-> find -not -name "sum.java"<br>
+To print the files in the current directory and one level down to the current directory->find -maxdepth 2 -name "sum.java"<br>
+To print the files in the current directory and two levels down to the current directory->find -maxdepth 3 -name "sum.java"<br>
+To print the files in the subdirectories between level 1 and 4->find -mindepth 2 -maxdepth 5 -name "sum.java"<br>
+To find the empty files in a directory->find . -maxdepth 1 -empty<br>
+To find the largest file in the current directory and sub directories->find . -type f -exec ls -s {} \;|sort -n -r |head -1
+To find the smallest file in the current directory and sub directories->find . -type f -exec ls -s {} \; | sort -n -r | tail -1
+To socket files->find . -type s<br>
+To Finding directories->find . -type d<br>
+To Finding hidden directories->find -type d -name ".*"<br>
+To Finding regular files->find . -type f<br>
+To Finding hidden files->find . -type f -name ".*"<br>
+To Finding files whose size is exactly 10M->find . -size 10M<br>
+To Finding files larger than 10M size->FIND . -size +10M<br>
+To Finding files smaller than 10M size->find . -size -10M
+To Display the files which are accessed after the modification of a give file->find -anewer "sum.java"<br>
+To Display the files which are changed after the modification of a give file->find -cnewer "sum.java"<br>
+To find the files based on the file permissions->find . -perm 777<br>
+To 
+To
+To
+To
+
+
+
+<h3>AWK Command</h3>
+To run the script in sum_column file and displays the sum of the 5th column in the input_file.-><br>
+#!/usr/bin/awk -f<br>
+BEGIN {sum=0} <br>
+{sum=sum+$5} <br>
+END {print sum}<br>
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

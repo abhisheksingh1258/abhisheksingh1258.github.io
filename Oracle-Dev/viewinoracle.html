@@ -65,8 +65,19 @@ A materialized view can query tables, views, and other materialized views. Colle
 For replication purposes, materialized views allow you to maintain copies of remote data on your local node. These copies are read-only. If you want to update the local copies, you have to use the Advanced Replication feature. You can select data from a materialized view as you would from a table or view.
 
 For data warehousing purposes, the materialized views commonly created are aggregate views, single-table aggregate views, and join views.
+ <br>
+<h3>View example</h3>
+ CREATE VIEW LuxuryItems AS<br>
+    SELECT <br>
+        *<br>
+    FROM<br>
+        items<br>
+    WHERE<br>
+        price > 700;
  
-
+ 
+ 
+ 
 
  </p>
 </body>

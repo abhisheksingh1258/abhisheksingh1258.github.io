@@ -4,12 +4,32 @@
 <p>We can manipulate the information within a SQL statement by means of assigning a name to a "select statement", 
 this concept is known a cursor. 
 A cursor is used for processing individual rows returned as a result for a query.<br>
-Oracle creates a memory area, known as the context area, for processing an SQL statement, which contains all the information needed for processing the statement; for example, the number of rows processed, etc.
+Oracle creates a memory area, known as the context area, for processing an SQL statement, 
+which contains all the information needed for processing the statement; for example, the number of rows processed, etc.<br>
 
 A cursor is a pointer to this context area. PL/SQL controls the context area through a cursor. A cursor holds the rows (one or more) returned by a SQL statement. 
-The set of rows the cursor holds is referred to as the active set.
+The set of rows the cursor holds is referred to as the active set.<br>
+
+
+<h3> Declare a Type and create a cursor variable for that type</h3>
+
+
+DECLARE <br>
+   CURSOR c_customers is<br>  
+      SELECT  name FROM customers; <br> 
+   TYPE c_list IS TABLE of customerS.No.ame%type; <br>
+   name_list c_list := c_list(); <br>
+   counter integer :=0; <br>
+BEGIN <br>
+   FOR n IN c_customers LOOP <br>
+      counter := counter +1; <br>
+      name_list.extend; <br>
+      name_list(counter)  := n.name; <br>
+      dbms_output.put_line('Customer('||counter||'):'||name_list(counter));<br> 
+   END LOOP; <br>
+END; <br>
+
 </p>
 
-<p> Declare a Type and create a cursor variable for that type<br>
 </body>
 </html>
