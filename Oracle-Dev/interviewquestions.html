@@ -1,6 +1,13 @@
 <html>
 <head>
 <h1>Interview Questions</h1>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
 </head>
 <body>
 <p>
@@ -26,6 +33,74 @@ Background and suspended processes are usually manipulated via job number (job I
 
 In addition, a job can consist of multiple processes running in a series or at the same time, in parallel. 
 Using the job ID is easier than tracking individual processes.<br>
+<div>
+<table width=5% style="float: left">
+  <tr>
+    <th>A1</th>
+  </tr>
+  <tr>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>1</td>
+  </tr>
+</table>
+
+<table width=5 style="float: left" color:red>
+  <tr>
+    <th>A2</th>
+  </tr>
+  <tr>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>1</td>
+  </tr>
+</table>
+
+</div><br><br><br><br><br>
+
+<br>
+
+Join A1 and A2 -> Inner Join->9 rows, left and right outer join->9 rows<br><br>
+
+
+finding the missing numbers from a sequence of numbers:<br>
+
+select min_a - 1 + level<br>
+     from ( select min(a1) min_a<br>
+                 , max(a1) max_a<br>
+              from t1<br>
+          )
+  connect by level <= max_a - min_a + 1<br>
+    minus<br>
+   select a1
+     from t1;
+<br>
+
+
+
+<h2>SQL Loader questions?</h2>
+
+<ul>
+<li> we cannot put dml statements in control file</li>
+<li>Bad file: The bad file contains rows that were rejected because of errors. <br>
+These errors might include bad datatypes or referential integrity constraints</li>
+<li>Discard file: The discard file contains rows that were discarded because they were filtered out because<br> of a statement in the SQL*Loader control file.</li>
+</ul>
+
+
+
+
+
+
+
 
 
 </p>
