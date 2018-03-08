@@ -42,6 +42,149 @@ BEGIN<br>
     END IF;<br>
 END;<br>
 
+<h3>Table Auditing Using DML Triggers</h3>
+
+CREATE TABLE sh_audit(<br>
+new_name VARCHAR2(50),<br>
+old_name varchar2(50),<br>
+user_name varchar2(50),<br>
+date varchar2(60),<br>
+operation varchar2(50));<br><br>
+						
+CREATE OR REPLACE TRIGGER superheroes_audit<br>
+BEFORE INSERT OR DELETE OR UPDATE ON superheroes<br>
+FOR EACH ROW<br>
+ENABLE<br>
+DECLARE<br>
+v_user varchar2 (30);<br>
+v_date varchar2(30);<br>
+BEGIN<br>
+SELECT user, TO_CHAR(sysdate, 'DD/MON/YYYY HH24:MI:SS') INTO v_user, v_date FROM dual;<br>
+
+IF INSERTING THEN<br>
+INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation)<br>
+VALUES(:NEW.SH_NAME, Null , v_user, v_date, 'Insert');<br>
+
+ELSIF DELETING THEN<br>
+INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation)<br>
+VALUES(NULL,:OLD.SH_NAME, v_user, v_date, 'Delete');<br>
+
+ELSIF UPDATING THEN<br>
+INSERT INTO sh_audit (new_name,old_name, user_name, entry_date, operation)<br>
+VALUES(:NEW.SH_NAME, :OLD.SH_NAME, v_user, v_date,'Update');<br>
+END IF;<br>
+END;<br>
+/
+
+
+<h3>Make synchronized backup copy of a table using DML Trigger</h3>
+
+
+CREATE or REPLACE trigger Sh_Backup<br>
+BEFORE INSERT OR DELETE OR UPDATE ON superheroes<br>
+FOR EACH ROW<br>
+ENABLE <br>
+BEGIN<br>
+IF INSERTING THEN<br>
+INSERT INTO superheroes_backup (SH_NAME) VALUES (:NEW.SH_NAME);<br>
+ELSIF DELETING THEN<br>
+DELETE FROM superheroes_backup WHERE SH_NAME =:old.sh_name;<br>
+ELSIF UPDATING THEN<br>
+UPDATE superheroes_backup<br>
+SET SH_NAME =:new.sh_name WHERE SH_NAME =:old.sh_name;<br>
+END IF;<br>
+END;<br>
+/<br>
+
+<h3>DDL Trigger with Schema Auditing Example</h3>
+
+
+CREATE TABLE schema_audit<br>
+(<br>
+ddl_date DATE,<br>
+ddl_user VARCHAR2(15),<br>
+object_created  VARCHAR2(15),<br>
+object_name  VARCHAR2(15),<br>
+ddl_operation VARCHAR2(15)<br>
+);<br>
+
+
+
+CREATE OR REPLACE TRIGGER hr_audit_tr <br>
+AFTER DDL ON SCHEMA<br>
+BEGIN<br>
+INSERT INTO schema_audit VALUES<br> 
+(<br>
+sysdate,<br>
+sys_context('USERENV','CURRENT_USER'),<br>
+ora_dict_obj_type, <br>
+ora_dict_obj_name,<br>
+ora_sysevent<br>
+);<br>
+END;<br>
+/<br>
+
+
+
+CREATE OR REPLACE TRIGGER db_audit_tr<br>
+AFTER DDL ON DATABASE<br>
+BEGIN<br>
+INSERT INTO schema_audit VALUES<br> 
+(<br>
+sysdate,<br>
+sys_context('USERENV','CURRENT_USER'),<br>
+ora_dict_obj_type, <br>
+ora_dict_obj_name,<br>
+ora_sysevent<br>
+);<br>
+END;<br>
+/<br>
+
+
+<h3>How To Create Database Event 'LogOn' Trigger In Oracle By Manish Sharma</h3>
+
+
+CREATE TABLE hr_evnt_audit<br>
+ (<br>
+  event_type VARCHAR2(30),<br>
+  logon_date DATE,<br>
+  logon_time VARCHAR2(15),<br>
+  logof_date DATE,<br>
+  logof_time VARCHAR2(15)<br>
+ );<br>
+
+
+CREATE OR REPLACE TRIGGER hr_lgon_audit<br>
+ AFTER LOGON ON SCHEMA<br>
+ BEGIN<br>
+  INSERT INTO hr_evnt_audit VALUES(<br>
+   ora_sysevent,<br>
+   sysdate,<br>
+   TO_CHAR(sysdate, 'hh24:mi:ss'),<br>
+   NULL,<br>
+   NULL<br>
+  );<br>
+  COMMIT;<br>
+ END;<br>
+ /<br>
+
+
+<h3>How To Create Instead-oF Insert Trigger in Oracle Database</h3>
+
+
+
+CREATE VIEW vw_rebellionrider AS
+ SELECT full_name, subject_name FROM trainer, subject;
+
+CREATE OR REPLACE TRIGGER tr_Io_Insert
+ INSTEAD OF INSERT ON vw_rebellionrider
+ FOR EACH ROW
+ BEGIN
+  INSERT INTO trainer (full_name) VALUES (:new.full_name);
+  INSERT INTO subject (subject_name) VALUES (:new.subject_name);
+ END;
+ /
+
 
 
 
