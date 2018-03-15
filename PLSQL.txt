@@ -1,0 +1,138 @@
+D: DEPTREE_TEMPTAB is a temporary table used to store dependency information returned by the DEPTREE_FILL procedure.
+E: USER_DEPENDECIES is used to display direct dependencies. ALL _DEPENDENCIES and DBA_DEPENDENCIES also store dependency information.
+Incorrect answers
+A: USER_SOURCE describes the text source of the stored objects owned by the current user
+B: UTL_DEPTREE is not a valid data dictionary view.
+C: USER_OBJECTS contains basic information about all objects owned by the current user, but does not contain dependency information
+F: DBA_DEPENDENT_OBJECTS this is not a valid data dictionary view however there is a DBA_DEPENDENCIES view
+
+
+
+
+https://www.briefmenow.org
+
+
+NCLOB represents a multi-byte character object.
+Use a drop procedure statement to drop a standalone procedure
+When referencing a package procedure or function from a stand-alone procedure or function, 
+if the package body changes and the package specification does not change, the stand-alone procedure referencing a package construct remains valid
+
+
+
+DEPTREE_TEMPTAB-dictionary views track dependencies
+
+Consider this scenario: A procedure X references a view Y that is based on a table Z.
+Y is a referenced object
+
+USER_DEPENDENCIES->views track object dependencies
+
+You create a DML trigger. For the timing information, which are valid with a DML trigger->BEFORE
+
+Which part of a database trigger determines the number of times the trigger body executes->trigger type
+
+Given a function CALCTAX: : CREATE OR REPLACE FUNCTION calctax (sal NUMBER) RETURN NUMBER IS BEGIN RETURN (sal * 0.05); END; 
+If you want to run the above function from the SQL*Plus prompt, which statement is true?
+
+You need to create a SQL*Plus environment variable X and issue the command EXECUTE :X := CALCTAX(1000);
+
+
+Which statement describe the state of a package variable after executing the package in which it is declared?
+It persists across transactions within a session
+
+
+
+Which statement will successfully assign .333 to the V_PLAYER_AVG variable from a procedure outside the package?
+This variable cannot be assigned a value from outside of the package.
+
+Which command can you issue to see the actual error message?->SHOW ERRORS
+
+There is a CUSTOMER table in a schema that has a public synonym CUSTOMER and you are granted all object privileges on it. You have a procedure PROCESS_CUSTOMER that processes customer information that is in the public synonym CUSTOMER table. You have just created a new table called CUSTOMER within your schema.
+Which statement is true?
+
+Creating the table has no effect and procedure PROCESS_CUSTOMER still accesses data from public synonym CUSTOMER table.
+
+B.
+If the structure of your CUSTOMER table is the same as the public synonym CUSTOMER table then the procedure PROCESS_CUSTOMER is invalidated and gives compilation errors.
+
+C.
+If the structure of your 
+CUSTOMER table is entirely different from the public synonym CUSTOMER table then the procedure PROCESS_CUSTOMER successfully recompiles and accesses your CUSTOMER table.
+
+D.
+If the structure of your CUSTOMER table is the same as the public synonym CUSTOMER table then the procedure PROCESS_CUSTOMER successfully recompiles when invoked and accesses your CUSTOMER table.->correct
+
+DBMS_STATS.gather_table_stats,
+
+USER_Tables
+
+Size of my DB ->7490 GB
+
+
+
+Which table should you query to determine when your procedure was last compiled?->USER_OBJECTS
+
+
+
+
+USER_PROCEDURES lists all functions and procedures, along with associated properties. 
+For example, ALL_PROCEDURES indicates whether or not a function is pipelined, parallel enabled or an aggregate function. If a function is pipelined or an aggregate function, the associated implementation type (if any) is also identified. It doesn’t have when the object was last complied.
+B: There is nothing called USER_PROCS.
+D: There is nothing called USER_PLSQL_UNITS
+
+
+
+
+
+
+
+
+When called from a SELECT statement or a parallelized UPDATE or DELETE statement,the function cannot modify any database tables When called from an UPDATE, or 
+DELETE statement, 
+the function cannot query or modify any database tables modified by that statement. 
+When called from a SELECT, INSERT, UPDATE, or DELETE statement, the function cannot execute SQL transaction control statements (such as COMMIT), 
+session control statements (such as SET ROLE), or system control statements (such as ALTER SYSTEM). 
+Also, it cannot execute DDL statements (such as CREATE) because they are followed by an automatic commit.
+The function cannot call another subprogram that breaks one of the above restrictions.
+
+Functions cannot be invoked in SQL statements if they return a nonserver
+data type such as BOOLEAN.
+Functions cannot be invoked in SQL statements if they modify the
+database.
+Functions cannot be invoked within a CHECK constraint or the
+DEFAULT clause of the CREATE TABLE statement.
+Functions can be invoked from within other server-side or client-side
+functions.
+
+
+All SQL statements have to go through various stages. Some stages may be skipped.
+1. Parse
+Every SQL statement must be parsed. Parsing the statement includes checking the statement’s syntax and validating the statement,
+ ensuring that all references to objects are correct, and ensuring that the relevant privileges to those objects exist.
+2. Bind
+After parsing, the Oracle server knows the meaning of the Oracle statement but still may not have enough information to execute the statement. The Oracle server may need values for any bind variable in the statement. The process of obtaining these values is called binding variables.
+3. Execute
+At this point, the Oracle server has all necessary information and resources, and the statement is executed.
+4. Fetch
+In the fetch stage, rows are selected and ordered (if requested by the query), and each successive fetch retrieves another row of the result, until the last row has been fetched. You can fetch queries, but not the DML statements.
+
+
+Statements about triggers:
+
+If errors occur during the compilation of a trigger, the trigger is still created
+If errors occur during the compilation of a trigger you can use the SHOW ERRORS command within iSQL *Plus to see the compilation errors
+If errors occur during the compilation of a trigger you can go into SQL *Plus and query the USER_ERRORS data dictionary view to see compilation errors.
+
+false statement about triggers:
+
+If errors occur during the compilation of a trigger you can go into SQL *Plus and query the USER_TRIGGERS data dictionary view to see the compilation errors.
+
+
+The constructs that can be grouped within a package include:
+Procedures and Functions
+Cursors, Variables and Constants
+Composite data types, such as TABLE or RECORD
+Exceptions
+Comments
+PRAGMAs
+
+

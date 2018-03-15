@@ -1,0 +1,49 @@
+<html>
+<head>
+<h3>AWK Examples</h3>
+</head>
+<body>
+<ol>
+<li><b>To run the script in sum_column file and displays the sum of the 5th column in the input_file.</b></li><br>
+#!/usr/bin/awk -f<br>
+BEGIN {sum=0} <br>
+{sum=sum+$5} <br>
+END {print sum}<br><br>
+
+
+<li><b>This awk command checks for the string "t4" in the 9th column and if it finds a match then it will print the entire line</b></li>
+
+awk '{ if($9 == "t4") print $0;}' input_file
+
+
+<li><b>This will print the squares of first numbers from 1 to 5.</b></li>
+
+awk 'BEGIN { for(i=1;i<=5;i++) print "square of", i, "is",i*i; }'
+
+<li><b>This will display the number of columns in each row</b></li>
+
+awk '{print NF}' input_file
+
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<li><b></b></li>
+<ol>
+
+</body>
+</html>
