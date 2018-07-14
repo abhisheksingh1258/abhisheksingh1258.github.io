@@ -205,9 +205,29 @@ END;<br>
 
 
 
+<h2>Use of Multiple cursors and parameters to create reports</h2>
 
-
-
+Declare
+CURSOR c_region is select * from wf_world_regions where region_name like '%America%' ORDER by region_name;
+cursor c_country (p_regionid number) is select * from wf_countries where region_id=p_regionid order by country_name;
+CURSOR c_language(p_countryID NUMBER) IS select l.language_id,language_name,country_id from wf_spoken_languages sl,wf_languages l
+where sl_language_id=l.language_id and country_id=p_countryID order by language_name;
+BEGIN
+	FOR v_regionRec in c_region 
+	LOOP
+	DBMS_OUTPUT.PUT_LINE(v_regionRec.region_id || ' ' || v_regionRec.region_name);
+	DBMS_OUTPUT.PUT_LINE('------------------');
+		FOR v_countryRec IN c_country(v_regionRec.region_id);
+		LOOP
+		DBMS_OUTPUT.PUT_LINE(v_countryRec.country_name|| ' '||v_countryRec.area || ' ' || v_countryRec.population);
+			FOR v_languageRec IN c_language(v_countryRec.country_id)
+			LOOP
+			DBMS_OUTPUT.PUT_LINE('----'|| v_languageRec.language_name);
+			END LOOP;
+		END LOOP;
+	DBMS_OUTPUT.PUT_LINE(' ');
+	END LOOP;
+END;
 
 
 

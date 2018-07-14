@@ -1,7 +1,166 @@
 <html>
 <head>
+<style>
+table,th,td {
+			border: 1px solid black;
+			}
+
+</style>
 <h3>Exceptions in Oracle</h3>
 </head>
 <body>
+
+An exception is a runtime error or warning condition, which can be predefined or user-defined.<br> 
+Predefined exceptions are raised implicitly (automatically) by the runtime system. User-defined exceptions must be raised explicitly by RAISE statements.<br>
+
+The three types of exceptions that can be handled at runtime are as follows
+<ul>
+
+<li>Predefined Oracle error – Refers to an undeclared error, which is raised by the Oracle server implicitly.</li>
+<li>Non predefined Oracle error – Refers to an error declared in the declarative section of the code that is raised by the Oracle server implicitly.</li>
+<li>User defined error – Refers to an error declared in the declarative section of the code that is raised explicitly.</li>
+</ul>
+
+<H4>Pragma Keyword</h4>
+
+The PRAGMA keyword signifies that the statement is a compiler directive, which is not processed when the PL/SQL is executed.<br>
+It is a pseudo-instruction that tells the compiler to interpret all the occurrences of exception name within the block with the associated Oracle server number.<br><br>
+
+
+<h4>the SQLCODE and SQLERRM functions</h4>
+<ul>
+<li>The SQLCODE function returns the Oracle error number for internal exceptions.</li>
+<li>This error number can be passed to the SQLERRM function to get the message associated with the error number.</li>
+<li>The SQLCODE function returns the value +1; whereas, the SQLERRM function returns the User Defined Exception message for the user defined exceptions.</li>
+</ul>
+
+<h2>difference between RAISE and RAISE_APPLICATION_ERROR</h2>
+
+<ul>
+<li>RAISE is used to call pre-defined exceptions declared in the declarative section of the PL/SQL block.</li>
+<li>RAISE_APPLICATION_ERROR is used to call user-defined ORA – error messages from stored subprograms.</li>
+</ul>
+
+
+No, it is not possible to have more than one OTHERS clause in the exception section.<br>
+
+<b>Programs Related to Exceptions</b><br>
+
+<h1>Handling User Defined Exceptions</h1>
+
+DECLARE <br>
+v_dept_idexcep_emps.department_id%TYPE;<br>
+v_count NUMBER;<br>
+BEGIN<br>
+v_dept_id := 40;<br>
+SELECT count(*) into v_count from excep_emps WHERE department_id = v_dept_id;<br>
+IF v_count = 0 THEN<br>
+RAISE_APLICATION_ERROR(-20203,'There are  no employess in this department');<br>
+END IF;<br>
+DBMS_OUTPUT.PUT_LINE('There are '|| v_count || 'employees');<br>
+DELETE from excep_emps WHERE department_id=v_dept_id;<br>
+IF SQL%ROWCOUNT = 0 THEN <br>
+RAISE_APLICATION_ERROR(-20204,'No Employees were deleted');<br>
+END IF;<br>
+DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT || 'employees were deleted');<br>
+ROLLBACK;<br>
+end;<br>
+
+2)DECLARE <br>
+   c_id customers.id%type := &cc_id;<br> 
+   c_name customerS.Name%type; <br>
+   c_addr customers.address%type;  <br>
+   -- user defined exception <br>
+   ex_invalid_id  EXCEPTION; <br>
+BEGIN <br>
+   IF c_id <= 0 THEN<br> 
+      RAISE ex_invalid_id; <br>
+   ELSE <br>
+      SELECT  name, address INTO  c_name, c_addr<br> 
+      FROM customers <br>
+      WHERE id = c_id;<br>
+      DBMS_OUTPUT.PUT_LINE ('Name: '||  c_name); <br> 
+      DBMS_OUTPUT.PUT_LINE ('Address: ' || c_addr); <br>
+   END IF; <br>
+
+EXCEPTION <br>
+   WHEN ex_invalid_id THEN<br> 
+      dbms_output.put_line('ID must be greater than zero!');<br> 
+   WHEN no_data_found THEN <br>
+      dbms_output.put_line('No such customer!');<br> 
+   WHEN others THEN <br>
+      dbms_output.put_line('Error!');  <br>
+END; <br>
+/
+
+
+<h2>Pre Defined Exceptions</h2>
+
+
+<table style="width:100%">
+<tr>
+	<th>Exception Name</th>
+	<th>Oracle code</th>
+	<th>Description</th>
+</tr>	
+	
+<tr>
+	<td>ACCESS_INTO_NULL</td>
+	<td>06530</td>
+	<td>It is raised when a null object is automatically assigned a value</td>
+</tr>
+
+<tr>
+	<td>DUP_VAL_ON_INDEX</td>
+	<td>01722</td>
+	<td>It is raised when duplicate values are attempted to be stored in a column with unique index.</td>
+</tr>
+
+<tr>
+	<td>INVALID_NUMBER</td>
+	<td>01722</td>
+	<td>It is raised when the conversion of a character string into a number fails because the string does not represent a valid number.</td>
+</tr>
+
+<tr>
+	<td>NO_DATA_FOUND</td>
+	<td>01403</td>
+	<td>It is raised when a SELECT INTO statement returns no rows.</td>
+</tr>
+
+<tr>
+	<td>TOO_MANY_ROWS</td>
+	<td>01422</td>
+	<td>It is raised when a SELECT INTO statement returns more than one row.</td>
+</tr>
+
+<tr>
+	<td>VALUE_ERROR</td>
+	<td>06502</td>
+	<td>It is raised when an arithmetic, conversion, truncation, or sizeconstraint error occurs.</td>
+</tr>
+	
+<tr>
+	<td>ZERO_DIVIDE</td>
+	<td>01476</td>
+	<td>It is raised when an attempt is made to divide a number by zero.</td>
+</tr>	
+
+<tr>
+	<td>ROWTYPE_MISMATCH</td>
+	<td>06504</td>
+	<td>It is raised when a cursor fetches value in a variable having incompatible data type.</td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
