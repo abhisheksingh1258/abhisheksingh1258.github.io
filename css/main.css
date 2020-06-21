@@ -27,3 +27,7 @@ body{
 .document-link{
     align-content: left;
 }
+
+ul{
+    text-align: left;
+}
